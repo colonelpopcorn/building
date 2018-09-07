@@ -1,5 +1,5 @@
-CC = g++
-CCFLAGS = -l winmm
+WIN_CC = g++
+WIN_CCFLAGS = -l winmm
 
-all: main.cpp
-	$(CC) -o builder main.cpp $(CCFLAGS)
+windows: main.cpp
+	$(WIN_CC) -o ./dist/builder main.cpp $(WIN_CCFLAGS)
