@@ -1,0 +1,6 @@
+pool:
+  vmImage: Ubunutu 16.04
+
+steps:
+  - script: make linux
+  - task: PublishBuildArtifacts@1
