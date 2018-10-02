@@ -4,3 +4,6 @@ pool:
 steps:
   - script: make linux
   - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.SourcesDirectory)/dist'
+      artifactName: 'building-v($Build.BuildNumber)'
