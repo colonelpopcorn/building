@@ -7,4 +7,3 @@ steps:
     inputs:
       pathToPublish: '$(Build.SourcesDirectory)/dist'
       artifactName: 'building-v($Build.BuildNumber)'
-  

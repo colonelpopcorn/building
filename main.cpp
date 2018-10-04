@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
     #if defined(_WIN32) || defined(_WIN64)
     STARTUPINFO si;
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     printf("Building...");
     PlaySoundA(initialSound, NULL, SND_FILENAME);
 
-    // Start the child process. 
+    // Start the child process.
     if( !CreateProcessA(
         NULL,   // No module name (use command line)
         command,        // Command line
@@ -40,10 +40,10 @@ int main(int argc, char* argv[])
         FALSE,          // Set handle inheritance to FALSE
         0,              // No creation flags
         NULL,           // Use parent's environment block
-        NULL,           // Use parent's starting directory 
+        NULL,           // Use parent's starting directory
         &si,            // Pointer to STARTUPINFO structure
         &pi )           // Pointer to PROCESS_INFORMATION structure
-    ) 
+    )
     {
         printf( "CreateProcess failed (%d).\n", GetLastError() );
         return 1;
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
     // Play the job's done sound...
     PlaySoundA(finalSound, NULL, SND_FILENAME);
 
-    // Close process and thread handles. 
+    // Close process and thread handles.
     CloseHandle( pi.hProcess );
     CloseHandle( pi.hThread );
     #endif
