@@ -1,9 +1,0 @@
-pool:
-  vmImage: VS2017
-
-steps:
-  - script: make windows
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: '$(Build.SourcesDirectory)/dist'
-      artifactName: 'building-v($Build.BuildNumber)'

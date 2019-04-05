@@ -1,6 +1,0 @@
-pool:
-  vmImage: macOS
-
-steps:
-  - script: make mac
-  - task: PublishBuildArtifacts@1
