@@ -1,0 +1,52 @@
+{
+  "name": "building",
+  "description": "Terminal listener to play sounds when commands finish or start.",
+  "version": "0.0.1",
+  "author": "Jonathan Ling @colonelpopcorn",
+  "bin": {
+    "building": "./bin/run"
+  },
+  "bugs": "https://github.com/colonelpopcorn/building/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.15",
+    "@oclif/config": "^1.13.0",
+    "@oclif/plugin-help": "^2.2.0",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@oclif/test": "^1.2.4",
+    "@oclif/tslint": "^3.1.1",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.14.8",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
+    "ts-node": "^8.2.0",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/colonelpopcorn/building",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "bin": "building"
+  },
+  "repository": "colonelpopcorn/building",
+  "scripts": {
+    "posttest": "tslint -p test -t stylish",
+    "prepack": "rm -rf lib && tsc -b",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
+  },
+  "types": "lib/index.d.ts"
+}
