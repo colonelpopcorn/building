@@ -7,13 +7,13 @@ describe('building', () => {
     .stdout()
     .do(() => cmd.run([]))
     .it('runs hello', ctx => {
-      expect(ctx.stdout).to.contain('hello world')
+      expect(ctx.stdout).to.contain('Please specify a command.')
     })
 
   test
     .stdout()
-    .do(() => cmd.run(['--name', 'jeff']))
-    .it('runs hello --name jeff', ctx => {
-      expect(ctx.stdout).to.contain('hello jeff')
+    .do(() => cmd.run(['echo jeff']))
+    .it('should echo jeff', ctx => {
+      expect(ctx.stdout).to.contain('jeff')
     })
 })
