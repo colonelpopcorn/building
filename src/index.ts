@@ -1,5 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import {exec} from 'child_process'
+
+import Player from './player'
 class Building extends Command {
   static description = 'describe the command here'
 
@@ -13,52 +15,30 @@ class Building extends Command {
 
   static args = [{name: 'cmd'}]
 
-  isRunning = false
-  player = require('play-sound')({})
+  player: any
 
   async run() {
-    const {args, flags} = this.parse(Building)
-
-    this.log(args, flags)
+    const {args} = this.parse(Building)
+    if (!this.player) {
+      this.player = new Player(require('play-sound')({}))
+    }
     if (args.cmd) {
       const result = await exec(args.cmd)
       result.stdout.on('data', async data => {
         this.log(data)
-        if (!this.isRunning) {
-          this.isRunning = !this.isRunning
-          await this.playBuildingStartSound()
+        if (!this.player.isRunning) {
+          this.player.isRunning = !this.player.isRunning
+          await this.player.playBuildingStartSound()
         }
       })
       result.stdout.on('close', async () => {
-        if (this.isRunning) {
-          this.isRunning = !this.isRunning
-          await this.stopBuildingSound()
+        if (this.player.isRunning) {
+          this.player.isRunning = !this.player.isRunning
+          await this.player.stopBuildingSound()
         }
       })
     } else {
       this.log('Please specify a command.')
-    }
-  }
-  async stopBuildingSound() {
-    await this.player.play('finished.wav')
-  }
-  async playBuildingStartSound() {
-    await this.player.play('affirmative.wav', {}, async (err: any) => {
-      if (!err) {
-        await this.playBuildingSound()
-      }
-    })
-  }
-
-  async playBuildingSound() {
-    if (this.isRunning) {
-      const files = ['progress1.wav', 'progress2.wav', 'progress3.wav', 'progress4.wav', 'progress5.wav'];
-      const sound = files[Math.floor(Math.random() * files.length)]
-      await this.player.play(`progress_sounds/${sound}`, {}, async (err: any) => {
-        if (!err) {
-          await this.playBuildingSound()
-        }
-      })
     }
   }
 }
